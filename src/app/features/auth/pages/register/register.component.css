@@ -1,0 +1,100 @@
+.register-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--surface-color);
+  color: var(--text-primary-color);
+}
+
+.register-container h2 {
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group .error {
+  color: var(--error-color);
+  font-size: 0.85rem;
+}
+
+.form-group.terms {
+  display: flex;
+  align-items: center;
+}
+
+.form-group.terms label {
+  margin-left: 8px;
+  font-size: 0.9rem;
+}
+
+.register-button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: var(--surface-color);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+  color: var(--text-primary-color);
+}
+.password-group {
+  display: flex;
+  gap: 10px;
+}
+
+.password-group > div {
+  flex: 1;
+}
+
+.password-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.password-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.text{
+  margin-top: 20px;
+  text-align: center;
+  color: var(--text-secondary-color);
+}
+
+
+

@@ -1,27 +1,48 @@
-# AHaronFrontend
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+AHaron-Frontend/
+├── README.md
+├── angular.json
+├── tsconfig.json
+├── package.json
+├── .env
+├── .gitignore
+└── src/
+├── app/
+│   ├── core/                  # Funcionalidades esenciales y servicios de nivel global
+│   │   ├── services/          # Servicios compartidos (e.g., auth.service.ts, api.service.ts)
+│   │   ├── guards/            # Guardas de rutas (e.g., auth.guard.ts)
+│   │   ├── interceptors/      # Interceptores HTTP (e.g., auth.interceptor.ts)
+│   │   ├── models/            # Modelos e interfaces compartidos (e.g., user.model.ts)
+│   │   └── constants/         # Constantes y configuraciones
+│   ├── shared/                # Componentes, pipes, y directivas reutilizables
+│   │   ├── components/        # Componentes reutilizables (e.g., button, modal)
+│   │   ├── pipes/             # Pipes personalizados
+│   │   ├── directives/        # Directivas personalizadas
+│   │   └── utilities/         # Funciones y utilidades
+│   ├── features/              # Módulos específicos de la aplicación
+│   │   ├── dashboard/         # Módulo del panel principal
+│   │   │   ├── components/    # Componentes exclusivos del dashboard
+│   │   │   ├── services/      # Servicios del dashboard
+│   │   │   └── pages/         # Páginas principales del dashboard
+│   │   ├── irrigation/        # Módulo para la gestión de zonas de riego
+│   │   │   ├── components/    # Componentes de riego (configuración, visualización)
+│   │   │   ├── services/      # Servicios específicos de riego
+│   │   │   └── pages/         # Páginas de gestión de zonas de riego
+│   │   ├── alerts/            # Módulo de alertas y notificaciones
+│   │   │   ├── components/    # Componentes de alertas
+│   │   │   ├── services/      # Servicios de alertas
+│   │   │   └── pages/         # Páginas de configuración de alertas
+│   │   ├── auth/              # Módulo de autenticación (login, registro)
+│   │   │   ├── components/    # Componentes de autenticación
+│   │   │   ├── services/      # Servicios de autenticación
+│   │   │   └── pages/         # Páginas de autenticación
+│   │   └── settings/          # Módulo de configuración de usuario/sistema
+│   │       ├── components/    # Componentes de configuración
+│   │       ├── services/      # Servicios de configuración
+│   │       └── pages/         # Páginas de configuración
+├── assets/                    # Archivos estáticos como imágenes y estilos
+│   ├── images/                # Imágenes de la aplicación
+│   ├── icons/                 # Íconos SVG o PNG
+│   └── styles/                # Estilos globales (e.g., themes.scss, variables.scss)
+└── environments/              # Configuraciones de entorno
+├── environment.prod.ts
+└── environment.ts

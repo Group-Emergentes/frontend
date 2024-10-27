@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  /* Primary*/
+  --primary-color: #2E7D32;         /* Verde oscuro - ideal para encabezados y botones */
+  --primary-light-color: #66BB6A;   /* Verde claro - para fondos o efectos de hover */
+  --primary-dark-color: #1B5E20;    /* Verde más oscuro - resalta detalles importantes */
+
+  /* Secondary */
+  --secondary-color: #FFC107;       /* Amarillo brillante - resalta alertas y notificaciones */
+  --secondary-dark-color: #FFA000;  /* Amarillo oscuro - complementa el secundario */
+  --accent-color: #FF7043;          /* Naranja - para botones de acción y elementos de foco */
+
+  /* Backgrounds */
+  --background-color: #F5F5F5;      /* Gris muy claro - fondo principal */
+  --surface-color: #FFFFFF;         /* Blanco puro - para tarjetas y paneles */
+  --border-color: #E0E0E0;          /* Gris claro - bordes y divisores */
+  --text-primary-color: #212121;    /* Gris oscuro - texto principal */
+  --text-secondary-color: #757575;  /* Gris medio - texto secundario y descripciones */
+
+  /* States */
+  --success-color: #4CAF50;         /* Verde éxito - mensajes de confirmación y estados positivos */
+  --error-color: #F44336;           /* Rojo error - errores y alertas */
+  --warning-color: #FF9800;         /* Naranja advertencia - avisos preventivos */
+  --info-color: #2196F3;            /* Azul info - información adicional y enlaces */
+}
+
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }

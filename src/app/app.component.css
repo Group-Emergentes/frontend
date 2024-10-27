@@ -1,0 +1,12 @@
+div{
+  display:grid;
+  min-height:100dvh;
+  grid-template-rows: auto 1fr auto;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+}
+div::-webkit-scrollbar {
+  display: none;
+}
+
