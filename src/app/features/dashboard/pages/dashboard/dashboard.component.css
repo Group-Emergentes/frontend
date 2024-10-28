@@ -12,5 +12,13 @@
 .chart-humidity{
   width: 500px;
   height: max-content;
+  margin: 10px;
+}
+
+.graphics {
   margin: auto;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
