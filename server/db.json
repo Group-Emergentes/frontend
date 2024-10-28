@@ -1,0 +1,51 @@
+{
+  "Zone": [
+    {
+      "id": 1,
+      "name": "Zona 1",
+      "crop": "Zanahorias",
+      "widthLand": 100,
+      "lengthLand": 200
+    },
+    {
+      "name": "gfgf",
+      "crop": "gfg",
+      "widthLand": 454,
+      "lengthLand": 5,
+      "id": 2
+    },
+    {
+      "name": "gfgf",
+      "crop": "gfg",
+      "widthLand": 454,
+      "lengthLand": 5,
+      "id": 3
+    },
+    {
+      "name": "fg",
+      "crop": "fg",
+      "widthLand": 45,
+      "lengthLand": 45,
+      "id": 4
+    },
+    {
+      "name": "RG",
+      "crop": "FGB",
+      "widthLand": 45,
+      "lengthLand": 45,
+      "id": 5
+    }
+  ],
+  "Tip": [
+    {
+      "id": 1,
+      "tipText": "Simplifica las fracciones siempre que sea posible para facilitar los cálculos.",
+      "topicId": 1
+    },
+    {
+      "id": 2,
+      "tipText": "Encuentra el mínimo común denominador al sumar o restar fracciones con diferentes denominadores.",
+      "topicId": 1
+    }
+  ]
+}
