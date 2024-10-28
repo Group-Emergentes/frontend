@@ -38,24 +38,11 @@ export class HistoricalHumidityGraphComponent implements AfterViewInit {
       plugins: {
         title: {
           display: true,
-          text: 'Point Style: circle',
+          text: 'History of water consumption.',
         }
       }
     }
   };
-
-  actions = [
-    { name: 'pointStyle: circle (default)', handler: () => this.updatePointStyle('circle') },
-    { name: 'pointStyle: crossRot', handler: () => this.updatePointStyle('crossRot') },
-    { name: 'pointStyle: dash', handler: () => this.updatePointStyle('dash') },
-    { name: 'pointStyle: line', handler: () => this.updatePointStyle('line') },
-    { name: 'pointStyle: rect', handler: () => this.updatePointStyle('rect') },
-    { name: 'pointStyle: rectRounded', handler: () => this.updatePointStyle('rectRounded') },
-    { name: 'pointStyle: rectRot', handler: () => this.updatePointStyle('rectRot') },
-    { name: 'pointStyle: star', handler: () => this.updatePointStyle('star') },
-    { name: 'pointStyle: triangle', handler: () => this.updatePointStyle('triangle') },
-    { name: 'pointStyle: false', handler: () => this.updatePointStyle(false) },
-  ];
 
   ngAfterViewInit(): void {
     this.createChart();
@@ -63,14 +50,6 @@ export class HistoricalHumidityGraphComponent implements AfterViewInit {
 
   createChart(): void {
     this.chart = new Chart(this.myChartRef.nativeElement, this.config);
-  }
-
-  updatePointStyle(style: 'circle' | 'cross' | 'crossRot' | 'dash' | 'line' | 'rect' | 'rectRounded' | 'rectRot' | 'star' | 'triangle' | false): void {
-    this.chart.data.datasets.forEach((dataset: ChartDataset<'line'>) => {
-      dataset.pointStyle = style;
-    });
-    this.chart.options.plugins!.title!.text = `Point Style: ${style}`;
-    this.chart.update();
   }
 
   generateRandomNumbers(count: number, min: number, max: number): number[] {

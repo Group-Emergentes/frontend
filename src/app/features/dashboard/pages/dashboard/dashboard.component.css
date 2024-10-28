@@ -11,5 +11,6 @@
 
 .chart-humidity{
   width: 500px;
+  height: max-content;
   margin: auto;
 }
