@@ -7,7 +7,7 @@ import {RouterLink} from "@angular/router";
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

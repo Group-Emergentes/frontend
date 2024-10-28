@@ -1,0 +1,15 @@
+
+
+
+.cards-info{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.chart-humidity{
+  width: 500px;
+  margin: auto;
+}
