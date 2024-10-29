@@ -101,7 +101,7 @@ button {
 
 /* Tarjetas transparentes dentro del panel de detalles */
 .transparent-card {
-  background-color: rgba(255, 255, 255, 0.9); /* Blanco con 90% de transparencia */
+  background-color: rgba(0, 150, 108, 0.2); /* Verde jade con 90% de transparencia */
   padding: 16px;
   margin-bottom: 16px;
   border-radius: 8px;
@@ -162,6 +162,75 @@ button {
   margin-top: 20px;
   width: 100%;
 }
+/* Opciones de edición */
+.edit-options {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  max-width: 400px;
+  width: 90%; /* Para hacerla responsiva en pantallas pequeñas */
+  z-index: 1000;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+
+.edit-options h3 {
+  color: var(--primary-color);
+}
+
+.edit-options button {
+  margin: 10px 5px;
+  padding: 10px 20px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Formulario de aspersor y sensor */
+.form-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.form-container label {
+  font-weight: bold;
+  display: block;
+  margin: 8px 0 4px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

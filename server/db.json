@@ -74,6 +74,15 @@
       "maximum": 6,
       "currentData": 20,
       "zoneId": 4
+    },
+    {
+      "nameId": "Temperatura#345",
+      "sensorType": "Temperature",
+      "minimum": 45,
+      "maximum": 4.5,
+      "currentData": 0,
+      "zoneId": 3,
+      "id": 6
     }
   ],
   "Sprinkler": [
@@ -140,6 +149,34 @@
       "connectionDate": "2024-08-30",
       "disconnectionDate": "",
       "zoneId": 1
+    },
+    {
+      "nameId": "dfgb",
+      "connectionDate": "2024-10-29",
+      "state": true,
+      "zoneId": 1,
+      "id": 9
+    },
+    {
+      "nameId": "Aspersor#245",
+      "connectionDate": "2024-10-29",
+      "state": true,
+      "zoneId": 3,
+      "id": 10
+    },
+    {
+      "nameId": "Aspersor#2455",
+      "connectionDate": "2024-10-29",
+      "state": true,
+      "zoneId": 3,
+      "id": 11
+    },
+    {
+      "nameId": "Aspersor#6767",
+      "connectionDate": "2024-10-29",
+      "state": true,
+      "zoneId": 3,
+      "id": 12
     }
   ]
 }

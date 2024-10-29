@@ -1,29 +1,30 @@
+<!-- Lista de zonas con botones de Editar y Ver detalles -->
 <div class="zone-container">
   <div *ngFor="let zone of zones"
        class="zone-card"
        [ngClass]="{'missing-data': !hasSprinklerOrSensor(zone.id)}">
     <h3>{{ zone.name }}</h3>
     <div class="button-container">
-      <button class="edit-btn">Editar</button>
+      <button class="edit-btn" (click)="onEdit(zone)">Agregar</button>
       <button class="details-btn" (click)="viewDetails(zone)">Ver detalles</button>
     </div>
   </div>
-</div>
 
-<div *ngIf="selectedZone" class="details-overlay">
+
+<!-- Modal de detalles de la zona seleccionada -->
+<div *ngIf="selectedZone && showDetails" class="details-overlay">
   <div class="details-panel">
     <h2>{{ selectedZone.name }}</h2>
 
     <!-- Sensores -->
     <div class="card transparent-card">
-      <h4>Sensores</h4>
+      <h3>Sensores</h3>
       <div class="sensor-data">
         <div *ngFor="let sensor of selectedZoneSensors" class="sensor-circle">
           <div class="circle green-circle"></div>
-          <p>Name: {{ sensor.nameId }}</p>
+          <p>{{ sensor.nameId }}</p>
           <h2>{{ sensor.currentData }} {{ sensor.sensorType === 'Humidity' ? '%' : (sensor.sensorType === 'Temperature' ? '°C' : '') }}</h2>
         </div>
-
       </div>
     </div>
 
@@ -32,13 +33,14 @@
       <h3>Aspersores</h3>
       <div class="sprinkler-data">
         <div *ngFor="let sprinkler of selectedZoneSprinklers" class="sprinkler-circle">
+          <div class="circle orange-circle"></div>
           <button [ngClass]="{'active-btn': sprinkler.state, 'inactive-btn': !sprinkler.state}">
             {{ sprinkler.state ? 'Activado' : 'Desactivado' }}
           </button>
           <div class="sprinkler-info">
-            <p>Nombre:{{ sprinkler.nameId }}</p>
-            <p>Conexión:{{ sprinkler.connectionDate }}</p>
-            <p>Desconexión:{{ sprinkler.disconnectionDate }}</p>
+            <p>Nombre: {{ sprinkler.nameId }}</p>
+            <p>Conexión: {{ sprinkler.connectionDate }}</p>
+            <p>Desconexión: {{ sprinkler.disconnectionDate }}</p>
           </div>
         </div>
       </div>
@@ -56,7 +58,45 @@
         <h3>Consumo total</h3>
         <p>700 litros de agua por aspersor</p>
       </div>
-    </div>
+          </div>
+
     <button class="close-btn" (click)="closeDetails()">Cerrar</button>
   </div>
+</div>
+
+<!-- Opciones de edición para agregar aspersor o sensor -->
+<div *ngIf="selectedZone && showEditOptions" class="edit-options">
+  <h3>Agregar a {{ selectedZone.name }}</h3>
+  <button (click)="toggleSprinklerForm()">Agregar Aspersor</button>
+  <button (click)="toggleSensorForm()">Agregar Sensor</button>
+
+  <!-- Formulario para agregar Aspersor -->
+  <div *ngIf="showSprinklerForm" class="form-container">
+    <form [formGroup]="addSprinklerForm" (ngSubmit)="addSprinkler()">
+      <label for="sprinklerNameId">Name ID del Aspersor</label>
+      <input id="sprinklerNameId" formControlName="nameId" type="text" required />
+      <button type="submit" [disabled]="!addSprinklerForm.valid">Agregar Aspersor</button>
+    </form>
+  </div>
+
+  <!-- Formulario para agregar Sensor -->
+  <div *ngIf="showSensorForm" class="form-container">
+    <form [formGroup]="addSensorForm" (ngSubmit)="addSensor()">
+      <label for="sensorNameId">Name ID del Sensor</label>
+      <input id="sensorNameId" formControlName="nameId" type="text" required />
+
+      <label for="sensorType">Tipo de Sensor</label>
+      <input id="sensorType" formControlName="sensorType" type="text" required />
+
+      <label for="minimum">Valor Mínimo</label>
+      <input id="minimum" formControlName="minimum" type="number" required />
+
+      <label for="maximum">Valor Máximo</label>
+      <input id="maximum" formControlName="maximum" type="number" required />
+
+      <button type="submit" [disabled]="!addSensorForm.valid">Agregar Sensor</button>
+    </form>
+  </div>
+  <button class="close-btn" (click)="closeEditOption()">Cerrar</button>
+</div>
 </div>
