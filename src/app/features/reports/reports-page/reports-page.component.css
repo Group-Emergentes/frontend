@@ -1,0 +1,33 @@
+
+.reports-container{
+  display: grid;
+  place-items: center;
+}
+.reports-container h4{
+  font-weight: bold;
+  color: var(--text-primary-color);
+  margin: 20px 0;
+  font-size: 2.5rem;
+  letter-spacing: 3px;
+}
+
+.reports{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.reports h5{
+  text-align: center;
+  color: var(--text-secondary-color);
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-decoration: underline;
+}
+.irrigation-frequency, .soilMoisture{
+  width: 40%;
+}
+

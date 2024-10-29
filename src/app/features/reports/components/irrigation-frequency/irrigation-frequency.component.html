@@ -1,0 +1,17 @@
+<div class="date">
+
+  <div class="zones-filter">
+    @for(zone of zones; track  zone){
+      <button>{{zone}}</button>
+    }
+  </div>
+
+  <p>Total volume of water consumed in the last year <span>{{irrigationFrequency.water_consumed.last_year}} L</span></p>
+  <p>Total volume of water consumed in the last 90 days <span>{{irrigationFrequency.water_consumed.last_90_days}} L</span></p>
+  <p>Total volume of water consumed in the last 30 days <span>{{irrigationFrequency.water_consumed.last_30_days}} L</span></p>
+
+  <div>
+    <canvas #chartCanvas></canvas>
+  </div>
+
+</div>

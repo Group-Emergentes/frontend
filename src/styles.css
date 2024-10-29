@@ -31,5 +31,10 @@
 }
 html, body {
   height: 100%;
+  overflow-y: scroll;
 }
 body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body::-webkit-scrollbar {
+  display: none;
+}
