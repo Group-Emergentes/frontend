@@ -24,7 +24,7 @@ export class SprinklerService {
     }),
   };
 
-  getSprinkler(): Observable<Sprinkler[]> {
+  getSprinklers(): Observable<Sprinkler[]> {
     return this.http
       .get<Sprinkler[]>(this.resourcePath(), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));

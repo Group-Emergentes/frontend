@@ -13,6 +13,13 @@
       "crop": "Lechugas",
       "widthLand": 454,
       "lengthLand": 5
+    },
+    {
+      "id": 3,
+      "name": "Zona 3",
+      "crop": "Lechugas",
+      "widthLand": 454,
+      "lengthLand": 5
     }
   ],
   "Sensor": [
@@ -33,6 +40,24 @@
       "maximum": 6,
       "currentData": 20,
       "zoneId": 1
+    },
+    {
+      "id": 1,
+      "nameId": "temperatureSensor#2354",
+      "sensorType": "Temperature",
+      "minimum": 3,
+      "maximum": 4,
+      "currentData": 10,
+      "zoneId": 2
+    },
+    {
+      "id": 2,
+      "nameId": "humiditySensor#4564",
+      "sensorType": "Humidity",
+      "minimum": 5,
+      "maximum": 6,
+      "currentData": 20,
+      "zoneId": 2
     }
   ],
     "Sprinkler": [
@@ -51,6 +76,22 @@
         "connectionDate": "2024-08-30",
         "disconnectionDate":"2024-09-30",
         "zoneId": 1
+      },
+      {
+        "id": 1,
+        "nameId": "Sensor#2354",
+        "state": 1,
+        "connectionDate": "2024-08-30",
+        "disconnectionDate":"",
+        "zoneId": 2
+      },
+      {
+        "id": 2,
+        "nameId": "Sensor#4354",
+        "state": 0,
+        "connectionDate": "2024-08-30",
+        "disconnectionDate":"2024-09-30",
+        "zoneId": 2
       }
   ]
 }

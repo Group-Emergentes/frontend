@@ -5,6 +5,7 @@
   --secondary-color: #FFC107;
   --secondary-dark-color: #FFA000;
   --accent-color: #FF7043;
+  --error-color: #F44336;
 }
 
 .zone-container {
@@ -23,8 +24,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.zone-card:hover {
-  transform: scale(1.02);
+.zone-card.missing-data {
+  background-color: var(--error-color);
 }
 
 .zone-card h3 {
@@ -62,6 +63,7 @@ button {
   background-color: var(--accent-color);
 }
 
+/* Responsivo para pantallas más pequeñas */
 @media (max-width: 768px) {
   .zone-card h3 {
     font-size: 1.2em;
