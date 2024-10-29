@@ -8,44 +8,49 @@
       "lengthLand": 200
     },
     {
-      "name": "gfgf",
-      "crop": "gfg",
+      "id": 2,
+      "name": "Zona 2",
+      "crop": "Lechugas",
       "widthLand": 454,
-      "lengthLand": 5,
-      "id": 2
-    },
-    {
-      "name": "gfgf",
-      "crop": "gfg",
-      "widthLand": 454,
-      "lengthLand": 5,
-      "id": 3
-    },
-    {
-      "name": "fg",
-      "crop": "fg",
-      "widthLand": 45,
-      "lengthLand": 45,
-      "id": 4
-    },
-    {
-      "name": "RG",
-      "crop": "FGB",
-      "widthLand": 45,
-      "lengthLand": 45,
-      "id": 5
+      "lengthLand": 5
     }
   ],
-  "Tip": [
+  "Sensor": [
     {
       "id": 1,
-      "tipText": "Simplifica las fracciones siempre que sea posible para facilitar los cálculos.",
-      "topicId": 1
+      "nameId": "temperatureSensor#2354",
+      "sensorType": "Temperature",
+      "minimum": 3,
+      "maximum": 4,
+      "currentData": 10,
+      "zoneId": 1
     },
     {
       "id": 2,
-      "tipText": "Encuentra el mínimo común denominador al sumar o restar fracciones con diferentes denominadores.",
-      "topicId": 1
+      "nameId": "humiditySensor#4564",
+      "sensorType": "Humidity",
+      "minimum": 5,
+      "maximum": 6,
+      "currentData": 20,
+      "zoneId": 1
     }
+  ],
+    "Sprinkler": [
+      {
+        "id": 1,
+        "nameId": "Sensor#2354",
+        "state": 1,
+        "connectionDate": "2024-08-30",
+        "disconnectionDate":"",
+        "zoneId": 1
+      },
+      {
+        "id": 2,
+        "nameId": "Sensor#4354",
+        "state": 0,
+        "connectionDate": "2024-08-30",
+        "disconnectionDate":"2024-09-30",
+        "zoneId": 1
+      }
   ]
 }

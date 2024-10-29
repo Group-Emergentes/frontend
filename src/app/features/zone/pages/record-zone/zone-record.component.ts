@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ZoneService} from "../../services/zone.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {Zone} from "../../models/Zone";
 import {HttpClientModule} from "@angular/common/http";
 
@@ -14,7 +14,8 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterLink
   ],
   templateUrl: './zone-record.component.html',
   styleUrl: './zone-record.component.css',

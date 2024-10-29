@@ -1,0 +1,73 @@
+:root {
+  --primary-color: #2E7D32;
+  --primary-light-color: #66BB6A;
+  --primary-dark-color: #1B5E20;
+  --secondary-color: #FFC107;
+  --secondary-dark-color: #FFA000;
+  --accent-color: #FF7043;
+}
+
+.zone-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 20px;
+}
+
+.zone-card {
+  background-color: var(--primary-light-color);
+  padding: 16px;
+  border-radius: 8px;
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.zone-card:hover {
+  transform: scale(1.02);
+}
+
+.zone-card h3 {
+  color: var(--primary-color);
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.button-container {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.zone-card:hover .button-container {
+  opacity: 1;
+}
+
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+}
+
+.edit-btn {
+  background-color: var(--secondary-dark-color);
+}
+
+.details-btn {
+  background-color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  .zone-card h3 {
+    font-size: 1.2em;
+  }
+
+  .zone-container {
+    padding: 10px;
+  }
+}

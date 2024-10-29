@@ -39,10 +39,15 @@ export class ZoneService {
   }
 
   getZoneById(id: number): Observable<Zone> {
-    return this.http.get<Zone>(`${this.resourcePath()}/${id}`);  // Petición GET para obtener el estudiante por ID
+    return this.http.get<Zone>(`${this.resourcePath()}/${id}`);
   }
 
-  updateStudent(student: Zone): Observable<Zone> {
-    return this.http.put<Zone>(`${this.resourcePath()}/${student.id}`, student);
+  updateZone(zone: Zone): Observable<Zone> {
+    return this.http.put<Zone>(`${this.resourcePath()}/${zone.id}`, zone);
   }
+
+  deleteZone(zoneId: number): Observable<void> {
+    return this.http.delete<void>(`${this.resourcePath()}/${zoneId}`);
+  }
+
 }

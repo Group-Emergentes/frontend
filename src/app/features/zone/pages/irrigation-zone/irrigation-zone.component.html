@@ -1,1 +1,10 @@
-<p>irrigation-zone works!</p>
+<div class="zone-container">
+  <div *ngFor="let zone of zones" class="zone-card">
+    <h3>{{ zone.name }}</h3>
+    <div class="button-container">
+      <button class="edit-btn">Editar</button>
+      <button class="details-btn">Ver detalles</button>
+    </div>
+  </div>
+</div>
+
