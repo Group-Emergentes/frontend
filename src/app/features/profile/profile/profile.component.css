@@ -1,0 +1,114 @@
+.profile-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background:#D6EFD8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-user{
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 20px;
+  flex: 0 1 35%;
+}
+.card-company {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 20px;
+  flex: 0 1 65%;
+}
+.card-user:hover{
+  box-shadow: 0 6px 12px  rgba(0, 0, 0, 0.5);
+}
+
+.card-company:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.card-avatar img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.card-avatar {
+  position: relative;
+}
+
+.avatar-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  background: #006769;
+  color: #FFFFFF;
+  border-radius: 50%;
+  margin-left: 5px;
+  padding: 8px;
+  transition: background 0.3s;
+}
+.avatar-button:hover {
+  background: #40A578;
+  color: #000000;
+}
+.card-header-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.edit-button {
+  border: none;
+  background: #006769;
+  color: #FFFFFF;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: background 0.3s;
+}
+
+.edit-button:hover {
+  background: #40A578;
+  color: #000000;
+}
+.card-info p {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.card-info .material-icons {
+  margin-right: 8px;
+}
+.card-details h6 {
+  font-size: 1rem;
+  color: #006769;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.card-info h6{
+  font-size: 1rem;
+  color: #006769;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 10px 0;
+}
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  .card-avatar img {
+    width: 80px;
+    height: 80px;
+  }
+
+}

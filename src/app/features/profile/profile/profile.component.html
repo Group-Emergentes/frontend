@@ -1,0 +1,32 @@
+<div class="profile-container">
+  <div class="card-user">
+    <div class="card-header-user">
+      <div class="card-avatar">
+        <img [src]="user?.avatar" alt="Avatar">
+        <button class="avatar-button" title="Change photo">
+          <span class="material-icons">camera_alt</span>
+        </button>
+      </div>
+      <button class="edit-button" title="Edit profile">
+        <span class="material-icons">edit</span>
+      </button>
+    </div>
+    <div class="card-details">
+      <h6>{{ user?.userName }}</h6>
+      <p>{{ user?.occupation }}</p>
+      <div class="card-info">
+        <p><span class="material-icons">phone</span> <strong>Phone:</strong> {{ user?.phone }}</p>
+        <p><span class="material-icons">email</span> <strong>Email:</strong> {{ user?.email }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-company">
+    <div class="card-info">
+      <h6>Company Details</h6>
+      <p><span class="material-icons">business_center</span> {{ user?.companyName }}</p>
+      <p><span class="material-icons">group</span> <strong>Employees:</strong> {{ user?.employees }}</p>
+      <p><span class="material-icons">location_on</span> <strong>Location:</strong> {{ user?.location }}</p>
+    </div>
+    <p><strong>Note:</strong> {{ user?.note }}</p>
+  </div>
+</div>
