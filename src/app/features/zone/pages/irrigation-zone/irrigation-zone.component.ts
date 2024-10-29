@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {HttpClientModule} from "@angular/common/http";
 import {ZoneService} from "../../services/zone.service";
 import {Zone} from "../../models/Zone";
 import {Sensor} from "../../models/Sensor";
@@ -16,7 +15,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
   ],
   templateUrl: './irrigation-zone.component.html',
   styleUrl: './irrigation-zone.component.css',
