@@ -25,6 +25,9 @@ export class IrrigationZoneComponent  implements OnInit {
   zones: Zone[] = [];
   sensors: Sensor[] = [];
   sprinklers: Sprinkler[] = [];
+  selectedZone: Zone | null = null;
+  selectedZoneSensors: Sensor[] = [];
+  selectedZoneSprinklers: Sprinkler[] = [];
 
   constructor(private zoneService: ZoneService,
               private sensorService: SensorService,
@@ -52,5 +55,16 @@ export class IrrigationZoneComponent  implements OnInit {
     const hasSensor = this.sensors.some(sensor => sensor.zoneId === zoneId);
     const hasSprinkler = this.sprinklers.some(sprinkler => sprinkler.zoneId === zoneId);
     return hasSensor || hasSprinkler;
+  }
+  viewDetails(zone: Zone): void {
+    this.selectedZone = zone;
+    this.selectedZoneSensors = this.sensors.filter(sensor => sensor.zoneId === zone.id);
+    this.selectedZoneSprinklers = this.sprinklers.filter(sprinkler => sprinkler.zoneId === zone.id);
+  }
+
+  closeDetails(): void {
+    this.selectedZone = null;
+    this.selectedZoneSensors = [];
+    this.selectedZoneSprinklers = [];
   }
 }

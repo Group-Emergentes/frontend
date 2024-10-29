@@ -20,6 +20,13 @@
       "crop": "Lechugas",
       "widthLand": 454,
       "lengthLand": 5
+    },
+    {
+      "id": 4,
+      "name": "Zona 4",
+      "crop": "Lechugas",
+      "widthLand": 454,
+      "lengthLand": 5
     }
   ],
   "Sensor": [
@@ -42,7 +49,7 @@
       "zoneId": 1
     },
     {
-      "id": 1,
+      "id": 3,
       "nameId": "temperatureSensor#2354",
       "sensorType": "Temperature",
       "minimum": 3,
@@ -51,47 +58,56 @@
       "zoneId": 2
     },
     {
-      "id": 2,
+      "id": 4,
       "nameId": "humiditySensor#4564",
       "sensorType": "Humidity",
       "minimum": 5,
       "maximum": 6,
       "currentData": 20,
       "zoneId": 2
+    },
+    {
+      "id": 5,
+      "nameId": "humiditySensor#4564",
+      "sensorType": "Humidity",
+      "minimum": 5,
+      "maximum": 6,
+      "currentData": 20,
+      "zoneId": 4
     }
   ],
-    "Sprinkler": [
-      {
-        "id": 1,
-        "nameId": "Sensor#2354",
-        "state": 1,
-        "connectionDate": "2024-08-30",
-        "disconnectionDate":"",
-        "zoneId": 1
-      },
-      {
-        "id": 2,
-        "nameId": "Sensor#4354",
-        "state": 0,
-        "connectionDate": "2024-08-30",
-        "disconnectionDate":"2024-09-30",
-        "zoneId": 1
-      },
-      {
-        "id": 1,
-        "nameId": "Sensor#2354",
-        "state": 1,
-        "connectionDate": "2024-08-30",
-        "disconnectionDate":"",
-        "zoneId": 2
-      },
-      {
-        "id": 2,
-        "nameId": "Sensor#4354",
-        "state": 0,
-        "connectionDate": "2024-08-30",
-        "disconnectionDate":"2024-09-30",
-        "zoneId": 2
-      }
+  "Sprinkler": [
+    {
+      "id": 1,
+      "nameId": "Sensor#2354",
+      "state": 1,
+      "connectionDate": "2024-08-30",
+      "disconnectionDate": "",
+      "zoneId": 1
+    },
+    {
+      "id": 2,
+      "nameId": "Sensor#4354",
+      "state": 0,
+      "connectionDate": "2024-08-30",
+      "disconnectionDate": "2024-09-30",
+      "zoneId": 1
+    },
+    {
+      "id": 1,
+      "nameId": "Sensor#2354",
+      "state": 1,
+      "connectionDate": "2024-08-30",
+      "disconnectionDate": "",
+      "zoneId": 2
+    },
+    {
+      "id": 2,
+      "nameId": "Sensor#4354",
+      "state": 0,
+      "connectionDate": "2024-08-30",
+      "disconnectionDate": "2024-09-30",
+      "zoneId": 2
+    }
   ]
 }

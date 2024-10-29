@@ -5,9 +5,18 @@
   --secondary-color: #FFC107;
   --secondary-dark-color: #FFA000;
   --accent-color: #FF7043;
+  --background-color: #F5F5F5;
+  --surface-color: #FFFFFF;
+  --border-color: #E0E0E0;
+  --text-primary-color: #212121;
+  --text-secondary-color: #757575;
+  --success-color: #4CAF50;
   --error-color: #F44336;
+  --warning-color: #FF9800;
+  --info-color: #2196F3;
 }
 
+/* Contenedor de la cuadrícula de zonas */
 .zone-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -15,8 +24,9 @@
   padding: 20px;
 }
 
+/* Estilo de cada tarjeta de zona */
 .zone-card {
-  background-color: var(--primary-light-color);
+  background-color: rgba(102, 187, 106, 0.8); /* Color verde claro con 80% de transparencia */
   padding: 16px;
   border-radius: 8px;
   position: relative;
@@ -25,15 +35,15 @@
 }
 
 .zone-card.missing-data {
-  background-color: var(--error-color);
+  background-color: rgba(244, 67, 54, 0.8); /* Color rojo con 80% de transparencia */
 }
 
-.zone-card h3 {
-  color: var(--primary-color);
-  margin: 0;
-  font-size: 1.5em;
+/* Efecto de escala en hover */
+.zone-card:hover {
+  transform: scale(1.02);
 }
 
+/* Ocultar botones inicialmente y mostrarlos al hacer hover en la tarjeta */
 .button-container {
   display: flex;
   gap: 8px;
@@ -46,13 +56,14 @@
   opacity: 1;
 }
 
+/* Estilos de botones */
 button {
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  color: #fff;
   font-weight: bold;
+  color: #fff;
 }
 
 .edit-btn {
@@ -63,13 +74,97 @@ button {
   background-color: var(--accent-color);
 }
 
-/* Responsivo para pantallas más pequeñas */
+/* Overlay */
+.details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Panel de detalles */
+.details-panel {
+  background-color: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 100%;
+}
+
+/* Tarjetas transparentes */
+.transparent-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+/* Estilos de los círculos de sensores y aspersores */
+.sensor-data, .sprinkler-data {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.circle {
+  width: 40px; /* Tamaño más grande */
+  height: 40px;
+  border-radius: 50%;
+}
+
+.blue-circle {
+  background-color: var(--info-color);
+}
+
+.orange-circle {
+  background-color: var(--accent-color);
+}
+
+/* Botones de estado de aspersores */
+.active-btn {
+  background-color: var(--info-color);
+}
+
+.inactive-btn {
+  background-color: var(--error-color);
+}
+
+.sprinkler-info p {
+  margin: 4px 0;
+}
+
+/* Contenedor para tarjetas de consumo */
+.consumption-container {
+  display: flex;
+  gap: 16px;
+}
+
+.close-btn {
+  background-color: var(--error-color);
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .zone-card h3 {
-    font-size: 1.2em;
+  .zone-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 
+  .details-panel {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
   .zone-container {
-    padding: 10px;
+    grid-template-columns: 1fr;
   }
 }
