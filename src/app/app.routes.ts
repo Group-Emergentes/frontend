@@ -4,7 +4,8 @@ import {RegisterComponent} from "./features/auth/pages/register/register.compone
 import {DashboardComponent} from "./features/dashboard/pages/dashboard/dashboard.component";
 import {ReportsPageComponent} from "./features/reports/reports-page/reports-page.component";
 import {PageNotFoundComponent} from "./shared/components/page-not-found/page-not-found.component";
-
+import {ZoneRecordComponent} from "./features/zone/pages/record-zone/zone-record.component";
+import {IrrigationZoneComponent} from "./features/zone/pages/irrigation-zone/irrigation-zone.component";
 
 export const routes: Routes = [
 
@@ -13,8 +14,11 @@ export const routes: Routes = [
   {path: 'register', component:RegisterComponent},
   {path: 'dashboard', component:DashboardComponent},
   {path: 'reports', component:ReportsPageComponent},
+  {path: 'zone-record', component:ZoneRecordComponent },
+  {path: 'irrigation-zone', component:IrrigationZoneComponent},
 
 
 
   {path: '**', component:PageNotFoundComponent}
+
 ];
