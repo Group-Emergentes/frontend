@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistoricalHumidityGraphComponent } from './historical-humidity-graph.component';
+import { DashboardGraphComponent } from './dashboard-graph.component';
 
 describe('HistoricalHumidityGraphComponent', () => {
-  let component: HistoricalHumidityGraphComponent;
-  let fixture: ComponentFixture<HistoricalHumidityGraphComponent>;
+  let component: DashboardGraphComponent;
+  let fixture: ComponentFixture<DashboardGraphComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HistoricalHumidityGraphComponent]
+      imports: [DashboardGraphComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HistoricalHumidityGraphComponent);
+    fixture = TestBed.createComponent(DashboardGraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

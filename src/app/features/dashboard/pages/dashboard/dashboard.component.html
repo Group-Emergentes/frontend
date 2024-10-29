@@ -2,45 +2,46 @@
 <section class="dashboard-container">
 
   <div class="cards-info">
-    <app-card-dashboard
-      [title]="'Título Ejemplo'"
-      [info]="'458.55'"
-      [description]="'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'"
-      [backgroundColor]="''"
-    ></app-card-dashboard>
+    @if(datas.length>0){
+      <app-card-dashboard
+        [title]="'Humidity'"
+        [info]="'18.55'"
+        [description]="'Zone 1 average Humidity'"
+        [backgroundColor]="''"
+      ></app-card-dashboard>
 
-    <app-card-dashboard
-      [title]="'Título Ejemplo'"
-      [info]="'458.55'"
-      [description]="'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'"
-      [backgroundColor]="''"
-    ></app-card-dashboard>
+      <app-card-dashboard
+        [title]="'Temperature'"
+        [info]="'20.32 °C'"
+        [description]="'Zone 1 average temperature'"
+        [backgroundColor]="''"
+      ></app-card-dashboard>
 
-    <app-card-dashboard
-      [title]="'Título Ejemplo'"
-      [info]="'458.55'"
-      [description]="'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'"
-      [backgroundColor]="''"
-    ></app-card-dashboard>
-
+    }
   </div>
 
   <div class="graphics">
     <section class="chart-humidity">
-      <app-historical-humidity-graph></app-historical-humidity-graph>
+      <app-dashboard-graph
+        [labelsGraph]="labels"
+        [dataGraph]="datas"
+      ></app-dashboard-graph>
     </section>
 
     <section class="chart-humidity">
-      <app-historical-humidity-graph></app-historical-humidity-graph>
+      <app-dashboard-graph
+        [labelsGraph]="labels"
+        [dataGraph]="datas"
+      ></app-dashboard-graph>
     </section>
 
     <section class="chart-humidity">
-      <app-historical-humidity-graph></app-historical-humidity-graph>
+      <app-dashboard-graph
+        [labelsGraph]="labels"
+        [dataGraph]="datas"
+      ></app-dashboard-graph>
     </section>
 
-    <section class="chart-humidity">
-      <app-historical-humidity-graph></app-historical-humidity-graph>
-    </section>
   </div>
 
 </section>
