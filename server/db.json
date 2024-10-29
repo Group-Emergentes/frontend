@@ -80,7 +80,7 @@
     {
       "id": 1,
       "nameId": "Sensor#2354",
-      "state": 1,
+      "state": true,
       "connectionDate": "2024-08-30",
       "disconnectionDate": "",
       "zoneId": 1
@@ -88,26 +88,58 @@
     {
       "id": 2,
       "nameId": "Sensor#4354",
-      "state": 0,
+      "state": false,
       "connectionDate": "2024-08-30",
       "disconnectionDate": "2024-09-30",
       "zoneId": 1
     },
     {
-      "id": 1,
+      "id": 3,
       "nameId": "Sensor#2354",
-      "state": 1,
+      "state": true,
       "connectionDate": "2024-08-30",
       "disconnectionDate": "",
       "zoneId": 2
     },
     {
-      "id": 2,
+      "id": 4,
       "nameId": "Sensor#4354",
-      "state": 0,
+      "state": false,
       "connectionDate": "2024-08-30",
       "disconnectionDate": "2024-09-30",
       "zoneId": 2
+    },
+    {
+      "id": 5,
+      "nameId": "Sensor#2354",
+      "state": true,
+      "connectionDate": "2024-08-30",
+      "disconnectionDate": "",
+      "zoneId": 1
+    },
+    {
+      "id": 6,
+      "nameId": "Sensor#2354",
+      "state": true,
+      "connectionDate": "2024-08-30",
+      "disconnectionDate": "",
+      "zoneId": 1
+    },
+    {
+      "id": 7,
+      "nameId": "Sensor#2354",
+      "state": true,
+      "connectionDate": "2024-08-30",
+      "disconnectionDate": "",
+      "zoneId": 1
+    },
+    {
+      "id": 8,
+      "nameId": "Sensor#2354",
+      "state": true,
+      "connectionDate": "2024-08-30",
+      "disconnectionDate": "",
+      "zoneId": 1
     }
   ]
 }

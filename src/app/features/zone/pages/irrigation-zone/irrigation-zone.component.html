@@ -16,12 +16,14 @@
 
     <!-- Sensores -->
     <div class="card transparent-card">
-      <h3>Sensores</h3>
+      <h4>Sensores</h4>
       <div class="sensor-data">
         <div *ngFor="let sensor of selectedZoneSensors" class="sensor-circle">
-          <div class="circle blue-circle"></div>
-          <p>{{ sensor.currentData }}</p>
+          <div class="circle green-circle"></div>
+          <p>Name: {{ sensor.nameId }}</p>
+          <h2>{{ sensor.currentData }} {{ sensor.sensorType === 'Humidity' ? '%' : (sensor.sensorType === 'Temperature' ? '°C' : '') }}</h2>
         </div>
+
       </div>
     </div>
 
@@ -30,14 +32,13 @@
       <h3>Aspersores</h3>
       <div class="sprinkler-data">
         <div *ngFor="let sprinkler of selectedZoneSprinklers" class="sprinkler-circle">
-          <div class="circle orange-circle"></div>
-          <button [ngClass]="{'active-btn': sprinkler.state, 'inactive-btn': sprinkler.state}">
-            {{ !sprinkler.state ? 'Activado' : 'Desactivado' }}
+          <button [ngClass]="{'active-btn': sprinkler.state, 'inactive-btn': !sprinkler.state}">
+            {{ sprinkler.state ? 'Activado' : 'Desactivado' }}
           </button>
           <div class="sprinkler-info">
-            <p>{{ sprinkler.nameId }}</p>
-            <p>{{ sprinkler.connectionDate }}</p>
-            <p>{{ sprinkler.disconnectionDate }}</p>
+            <p>Nombre:{{ sprinkler.nameId }}</p>
+            <p>Conexión:{{ sprinkler.connectionDate }}</p>
+            <p>Desconexión:{{ sprinkler.disconnectionDate }}</p>
           </div>
         </div>
       </div>
@@ -47,9 +48,13 @@
     <div class="consumption-container">
       <div class="card transparent-card">
         <h3>Consumo de agua</h3>
+        <p>Promedio diario: 10 litros de agua por aspersor</p>
+        <p>Promedio semanal: 20 litros de agua por aspersor</p>
+        <p>Promedio mensual: 60 litros de agua por aspersor</p>
       </div>
       <div class="card transparent-card">
         <h3>Consumo total</h3>
+        <p>700 litros de agua por aspersor</p>
       </div>
     </div>
     <button class="close-btn" (click)="closeDetails()">Cerrar</button>
