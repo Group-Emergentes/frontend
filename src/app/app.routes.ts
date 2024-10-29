@@ -6,6 +6,7 @@ import {ReportsPageComponent} from "./features/reports/reports-page/reports-page
 import {PageNotFoundComponent} from "./shared/components/page-not-found/page-not-found.component";
 import {ZoneRecordComponent} from "./features/zone/pages/record-zone/zone-record.component";
 import {IrrigationZoneComponent} from "./features/zone/pages/irrigation-zone/irrigation-zone.component";
+import {ProfileComponent} from "./features/profile/profile/profile.component";
 
 export const routes: Routes = [
 
@@ -16,7 +17,7 @@ export const routes: Routes = [
   {path: 'reports', component:ReportsPageComponent},
   {path: 'zone-record', component:ZoneRecordComponent },
   {path: 'irrigation-zone', component:IrrigationZoneComponent},
-
+  {path: 'profile', component:ProfileComponent},
 
 
   {path: '**', component:PageNotFoundComponent}
