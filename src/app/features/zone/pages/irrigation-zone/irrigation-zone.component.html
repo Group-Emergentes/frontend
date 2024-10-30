@@ -1,102 +1,73 @@
-<!-- Lista de zonas con botones de Editar y Ver detalles -->
 <div class="zone-container">
-  <div *ngFor="let zone of zones"
-       class="zone-card"
-       [ngClass]="{'missing-data': !hasSprinklerOrSensor(zone.id)}">
-    <h3>{{ zone.name }}</h3>
-    <div class="button-container">
-      <button class="edit-btn" (click)="onEdit(zone)">Agregar</button>
-      <button class="details-btn" (click)="viewDetails(zone)">Ver detalles</button>
-    </div>
-  </div>
 
+  <h4>Irrigation Zones</h4>
 
-<!-- Modal de detalles de la zona seleccionada -->
-<div *ngIf="selectedZone && showDetails" class="details-overlay">
-  <div class="details-panel">
-    <h2>{{ selectedZone.name }}</h2>
+  <button routerLink="/zone-record">Add Zone</button>
 
-    <!-- Sensores -->
-    <div class="card transparent-card">
-      <h3>Sensores</h3>
-      <div class="sensor-data">
-        <div *ngFor="let sensor of selectedZoneSensors" class="sensor-circle">
-          <div class="circle green-circle"></div>
-          <p>{{ sensor.nameId }}</p>
-          <h2>{{ sensor.currentData }} {{ sensor.sensorType === 'Humidity' ? '%' : (sensor.sensorType === 'Temperature' ? '°C' : '') }}</h2>
+  <div class="zone-card">
+    @for (zone of zones ; track  zone){
+      <div class="card">
+        <label>{{ zone.name }}</label>
+        <div class="options">
+          <button class="edit-btn" (click)="toggleEditingZone()">Modify Sensors</button>
+          <button class="details-btn" routerLink="/zone-detail/1">View Details</button>
         </div>
       </div>
-    </div>
+    }
+  </div>
 
-    <!-- Aspersores -->
-    <div class="card transparent-card">
-      <h3>Aspersores</h3>
-      <div class="sprinkler-data">
-        <div *ngFor="let sprinkler of selectedZoneSprinklers" class="sprinkler-circle">
-          <div class="circle orange-circle"></div>
-          <button [ngClass]="{'active-btn': sprinkler.state, 'inactive-btn': !sprinkler.state}">
-            {{ sprinkler.state ? 'Activado' : 'Desactivado' }}
-          </button>
-          <div class="sprinkler-info">
-            <p>Nombre: {{ sprinkler.nameId }}</p>
-            <p>Conexión: {{ sprinkler.connectionDate }}</p>
-            <p>Desconexión: {{ sprinkler.disconnectionDate }}</p>
+</div>
+
+
+@if(isEditingZone){
+
+<div class="modify-sensor">
+  <div class="modify-container">
+    <h4>Modify Sensors and Sprinklers in Zone 1</h4>
+
+    <section class="forms">
+      <div class="sensors">
+        <div class="sensors-zone">
+          <p>Lorem ipsum.</p>
+          <p>Lorem ipsum.</p>
+          <p>Lorem ipsum.</p>
+          <p>Lorem ipsum.</p>
+        </div>
+
+        <div class="sensor-form">
+          <h5>New Sensor</h5>
+          <div class="input-box">
+            <label for="sensorType">Sensor Type</label>
+            <input id="sensorType" type="text" placeholder="temperature">
           </div>
+          <div class="input-box">
+            <label for="sensorId">Sensor ID</label>
+            <input id="sensorId" type="text" placeholder="temperature#245">
+          </div>
+          <button><mat-icon>add</mat-icon></button>
         </div>
       </div>
-    </div>
 
-    <!-- Consumo de Agua y Consumo Total -->
-    <div class="consumption-container">
-      <div class="card transparent-card">
-        <h3>Consumo de agua</h3>
-        <p>Promedio diario: 10 litros de agua por aspersor</p>
-        <p>Promedio semanal: 20 litros de agua por aspersor</p>
-        <p>Promedio mensual: 60 litros de agua por aspersor</p>
+      <div class="sprinklers">
+        <div class="sprinkler-zone">
+          <p>Lorem ipsum.</p>
+          <p>Lorem ipsum.</p>
+          <p>Lorem ipsum.</p>
+          <p>Lorem ipsum.</p>
+        </div>
+
+        <div class="sprinkler-form">
+          <h5>New Sprinkler</h5>
+          <div class="input-box">
+            <label for="sprinklerId">Sprinkler ID</label>
+            <input id="sprinklerId" type="text" placeholder="sprinkler#245">
+          </div>
+          <button><mat-icon>add</mat-icon></button>
+        </div>
       </div>
-      <div class="card transparent-card">
-        <h3>Consumo total</h3>
-        <p>700 litros de agua por aspersor</p>
-      </div>
-          </div>
+    </section>
 
-    <button class="close-btn" (click)="closeDetails()">Cerrar</button>
+    <button (click)="toggleEditingZone()">Exit</button>
   </div>
 </div>
-
-<!-- Opciones de edición para agregar aspersor o sensor -->
-<div *ngIf="selectedZone && showEditOptions" class="edit-options">
-  <h3>Agregar a {{ selectedZone.name }}</h3>
-  <button (click)="toggleSprinklerForm()">Agregar Aspersor</button>
-  <button (click)="toggleSensorForm()">Agregar Sensor</button>
-
-  <!-- Formulario para agregar Aspersor -->
-  <div *ngIf="showSprinklerForm" class="form-container">
-    <form [formGroup]="addSprinklerForm" (ngSubmit)="addSprinkler()">
-      <label for="sprinklerNameId">Name ID del Aspersor</label>
-      <input id="sprinklerNameId" formControlName="nameId" type="text" required />
-      <button type="submit" [disabled]="!addSprinklerForm.valid">Agregar Aspersor</button>
-    </form>
-  </div>
-
-  <!-- Formulario para agregar Sensor -->
-  <div *ngIf="showSensorForm" class="form-container">
-    <form [formGroup]="addSensorForm" (ngSubmit)="addSensor()">
-      <label for="sensorNameId">Name ID del Sensor</label>
-      <input id="sensorNameId" formControlName="nameId" type="text" required />
-
-      <label for="sensorType">Tipo de Sensor</label>
-      <input id="sensorType" formControlName="sensorType" type="text" required />
-
-      <label for="minimum">Valor Mínimo</label>
-      <input id="minimum" formControlName="minimum" type="number" required />
-
-      <label for="maximum">Valor Máximo</label>
-      <input id="maximum" formControlName="maximum" type="number" required />
-
-      <button type="submit" [disabled]="!addSensorForm.valid">Agregar Sensor</button>
-    </form>
-  </div>
-  <button class="close-btn" (click)="closeEditOption()">Cerrar</button>
-</div>
-</div>
+}

@@ -1,0 +1,92 @@
+
+
+.details-panel {
+  background-color: var(--surface-color);
+  max-height: 600px;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.details-panel h2{
+  font-weight: bold;
+}
+
+.transparent-card {
+  margin: 20px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: start;
+}
+
+.sensor-data {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 20px 0;
+  background-color: var(--background-color);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.sensor-data .sensor{
+  display: flex;
+  padding: 10px;
+  line-height: 5px;
+  width: 500px;
+  margin-bottom: 10px;
+
+  .name, .data{
+    color: var(--text-primary-color);
+    font-weight: 500;
+  }
+  .info{
+    margin-top: 20px;
+    color: var(--success-color);
+  }
+}
+
+.sensor-data .circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.sensor-data .green-circle {
+  background-color: var(--success-color);
+}
+
+
+
+
+
+.sprinkler-data {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.active-btn {
+  background-color: var(--info-color);
+}
+
+.inactive-btn {
+  background-color: var(--error-color);
+}
+
+.sprinkler-info p {
+  margin: 2px 0;
+}
+
+
+
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fff;
+}
+

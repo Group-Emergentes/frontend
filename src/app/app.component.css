@@ -10,3 +10,7 @@ div::-webkit-scrollbar {
   display: none;
 }
 
+.body{
+  width: 100vw;
+  max-width: 1800px;
+}

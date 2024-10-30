@@ -1,7 +1,6 @@
 <div class="zone-container">
   <h2>New Zone</h2>
   <form (ngSubmit)="onSubmitZone()" [formGroup]="zoneForm">
-
     <div class="form-group">
       <label for="name">Zone Name</label>
       <input id="name" type="text" formControlName="name" required />
@@ -22,6 +21,26 @@
       <input id="lengthLand" type="number" formControlName="lengthLand" required />
     </div>
 
+    <div class="form-group">
+      <label for="minTemperature">Minimum Temperature (°C)</label>
+      <input id="minTemperature" type="number" formControlName="minTemperature" placeholder="e.g., 15 °C" required />
+    </div>
+
+    <div class="form-group">
+      <label for="maxTemperature">Maximum Temperature (°C)</label>
+      <input id="maxTemperature" type="number" formControlName="maxTemperature" placeholder="e.g., 35 °C" required />
+    </div>
+
+    <div class="form-group">
+      <label for="minHumidity">Minimum Humidity (%)</label>
+      <input id="minHumidity" type="number" formControlName="minHumidity" placeholder="e.g., 30%" required />
+    </div>
+
+    <div class="form-group">
+      <label for="maxHumidity">Maximum Humidity (%)</label>
+      <input id="maxHumidity" type="number" formControlName="maxHumidity" placeholder="e.g., 80%" required />
+    </div>
+
     <button type="submit" [disabled]="!zoneForm.valid" class="zone-button">
       Add Zone
     </button>
@@ -29,6 +48,5 @@
     <div class="text">
       <p><a routerLink="/irrigation-zone">View Zones</a></p>
     </div>
-
   </form>
 </div>

@@ -1,0 +1,39 @@
+<div class="details-panel">
+    <h2>{{detailZone.zoneName}}</h2>
+
+    <div class="transparent-card">
+      <h3>Sensors</h3>
+      <div class="sensor-data">
+        @for(sensor of detailZone.sensors; track sensor){
+          <div class="sensor">
+            <div class="circle green-circle"></div>
+            <div>
+              <p class="name">{{ sensor.name }}</p>
+              <p class="data">Humidity: {{sensor.data}}</p>
+              <p class="info">Reporting Correctly</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="card transparent-card">
+      <h3>Sprinklers</h3>
+      <div class="sprinkler-data">
+        @for (sprinkler of detailZone.sprinklers; track sprinkler){
+          <div class="sprinkler-circle">
+            <div class="circle orange-circle"></div>
+            <button [ngClass]="{'active-btn': sprinkler.status, 'inactive-btn': !sprinkler.status}">
+              {{ sprinkler.status ? 'Activado' : 'Desactivado' }}
+            </button>
+            <div class="sprinkler-info">
+              <p>Name: {{ sprinkler.id }}</p>
+              <p>Last Connection: {{ sprinkler.lastConnection}}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+</div>
+

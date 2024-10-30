@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ZoneService} from "../../services/zone.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router, RouterLink} from "@angular/router";
-import {Zone} from "../../models/Zone";
-import {HttpClientModule} from "@angular/common/http";
-
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { ZoneService } from "../../services/zone.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router, RouterLink } from "@angular/router";
+import { Zone } from "../../models/Zone";
 
 @Component({
   selector: 'app-record-zone',
@@ -14,7 +12,6 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule,
     RouterLink
   ],
   templateUrl: './zone-record.component.html',
@@ -34,7 +31,11 @@ export class ZoneRecordComponent {
       name: ['', Validators.required],
       crop: ['', Validators.required],
       widthLand: ['', [Validators.required, Validators.min(1)]],
-      lengthLand: ['', [Validators.required, Validators.min(1)]]
+      lengthLand: ['', [Validators.required, Validators.min(1)]],
+      minTemperature: ['', [Validators.required, Validators.min(-50), Validators.max(50)]], // Mínimo de temperatura
+      maxTemperature: ['', [Validators.required, Validators.min(-50), Validators.max(50)]], // Máximo de temperatura
+      minHumidity: ['', [Validators.required, Validators.min(0), Validators.max(100)]], // Mínimo de humedad
+      maxHumidity: ['', [Validators.required, Validators.min(0), Validators.max(100)]]  // Máximo de humedad
     });
   }
 

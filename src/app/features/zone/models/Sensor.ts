@@ -1,6 +1,6 @@
 export interface Sensor {
   id: number;
-  nameId: string;
+  name: string;
   sensorType: string;
   minimum: number;
   maximum: number;

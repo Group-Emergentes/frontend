@@ -8,6 +8,189 @@ import {Sprinkler} from "../../models/Sprinkler";
 import {SensorService} from "../../services/sensor.service";
 import {SprinklerService} from "../../services/sprinkler.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {DetailsZoneComponent} from "../details-zone/details-zone.component";
+import {RouterLink} from "@angular/router";
+import {MatIcon} from "@angular/material/icon";
+
+
+let zones = [
+  {
+    "id": 1,
+    "name": "Zona 1",
+    "cropType": "Zanahorias",
+    "widthLand": 100,
+    "lengthLand": 200
+  },
+  {
+    "id": 2,
+    "name": "Zona 2",
+    "cropType": "Lechugas",
+    "widthLand": 454,
+    "lengthLand": 5
+  },
+  {
+    "id": 3,
+    "name": "Zona 3",
+    "cropType": "Lechugas",
+    "widthLand": 454,
+    "lengthLand": 5
+  },
+  {
+    "id": 4,
+    "name": "Zona 4",
+    "cropType": "Lechugas",
+    "widthLand": 454,
+    "lengthLand": 5
+  }
+]
+let sensors = [
+  {
+    "id": 1,
+    "name": "temperatureSensor#2354",
+    "sensorType": "Temperature",
+    "minimum": 3,
+    "maximum": 4,
+    "currentData": 10,
+    "zoneId": 1
+  },
+  {
+    "id": 2,
+    "name": "humiditySensor#4564",
+    "sensorType": "Humidity",
+    "minimum": 5,
+    "maximum": 6,
+    "currentData": 20,
+    "zoneId": 1
+  },
+  {
+    "id": 3,
+    "name": "temperatureSensor#2354",
+    "sensorType": "Temperature",
+    "minimum": 3,
+    "maximum": 4,
+    "currentData": 10,
+    "zoneId": 2
+  },
+  {
+    "id": 4,
+    "name": "humiditySensor#4564",
+    "sensorType": "Humidity",
+    "minimum": 5,
+    "maximum": 6,
+    "currentData": 20,
+    "zoneId": 2
+  },
+  {
+    "id": 5,
+    "name": "humiditySensor#4564",
+    "sensorType": "Humidity",
+    "minimum": 5,
+    "maximum": 6,
+    "currentData": 20,
+    "zoneId": 4
+  },
+  {
+    "name": "Temperatura#345",
+    "sensorType": "Temperature",
+    "minimum": 45,
+    "maximum": 4.5,
+    "currentData": 0,
+    "zoneId": 3,
+    "id": 6
+  }
+]
+let sprinklers = [
+  {
+    "id": 1,
+    "name": "Sensor#2354",
+    "state": true,
+    "disconnectionDate": "",
+    "zoneId": 1,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "id": 2,
+    "name": "Sensor#4354",
+    "state": false,
+    "zoneId": 1,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "id": 3,
+    "name": "Sensor#2354",
+    "state": true,
+    "disconnectionDate": "",
+    "zoneId": 2,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "id": 4,
+    "name": "Sensor#4354",
+    "state": false,
+    "zoneId": 2,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "id": 5,
+    "name": "Sensor#2354",
+    "state": true,
+    "disconnectionDate": "",
+    "zoneId": 1,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "id": 6,
+    "name": "Sensor#2354",
+    "state": true,
+    "disconnectionDate": "",
+    "zoneId": 1,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "id": 7,
+    "name": "Sensor#2354",
+    "state": true,
+    "disconnectionDate": "",
+    "zoneId": 1,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "id": 8,
+    "name": "Sensor#2354",
+    "state": true,
+    "disconnectionDate": "",
+    "zoneId": 1,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "name": "dfgb",
+    "state": true,
+    "zoneId": 1,
+    "id": 9,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "name": "Aspersor#245",
+    "state": true,
+    "zoneId": 3,
+    "id": 10,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "name": "Aspersor#2455",
+    "state": true,
+    "zoneId": 3,
+    "id": 11,
+    "lastConnection":"2024-05-05"
+  },
+  {
+    "name": "Aspersor#6767",
+    "state": true,
+    "zoneId": 3,
+    "id": 12,
+    "lastConnection":"2024-05-05"
+  }
+]
 
 @Component({
   selector: 'app-irrigation-zone',
@@ -15,165 +198,30 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   imports: [
     ReactiveFormsModule,
     CommonModule,
+    DetailsZoneComponent,
+    RouterLink,
+    MatIcon,
   ],
   templateUrl: './irrigation-zone.component.html',
   styleUrl: './irrigation-zone.component.css',
   providers: [ZoneService,SensorService, SprinklerService]
 })
 export class IrrigationZoneComponent  implements OnInit {
-  zones: Zone[] = [];
-  sensors: Sensor[] = [];
-  sprinklers: Sprinkler[] = [];
-  selectedZone: Zone | null = null;
-  selectedZoneSensors: Sensor[] = [];
-  selectedZoneSprinklers: Sprinkler[] = [];
-  addSprinklerForm: FormGroup;
-  addSensorForm: FormGroup;
-  showSprinklerForm = false;
-  showSensorForm = false;
 
+  isEditingZone = false;
 
-  constructor(private zoneService: ZoneService,
-              private sensorService: SensorService,
-              private sprinklersService: SprinklerService,
-              private fb: FormBuilder,
-              private snackBar: MatSnackBar
+  constructor(
   ) {
-    // Formulario para agregar Aspersor
-    this.addSprinklerForm = this.fb.group({
-      nameId: ['', Validators.required]
-    });
 
-    // Formulario para agregar Sensor
-    this.addSensorForm = this.fb.group({
-      nameId: ['', Validators.required],
-      sensorType: ['', Validators.required],
-      minimum: ['', Validators.required],
-      maximum: ['', Validators.required]
-    });
   }
-
-
 
   ngOnInit(): void {
-    // Obtiene las zonas
-    this.zoneService.getZones().subscribe((data: Zone[]) => {
-      this.zones = data;
-    });
 
-    // Obtiene los sensores
-    this.sensorService.getSensors().subscribe((data: Sensor[]) => {
-      this.sensors = data;
-    });
-
-    // Obtiene los aspersores
-    this.sprinklersService.getSprinklers().subscribe((data: Sprinkler[]) => {
-      this.sprinklers = data;
-    });
   }
 
-  hasSprinklerOrSensor(zoneId: number): boolean {
-    const hasSensor = this.sensors.some(sensor => sensor.zoneId === zoneId);
-    const hasSprinkler = this.sprinklers.some(sprinkler => sprinkler.zoneId === zoneId);
-    return hasSensor || hasSprinkler;
+  toggleEditingZone(){
+    this.isEditingZone = !this.isEditingZone;
   }
 
-  showDetails = false;
-  showEditOptions = false;
-
-  viewDetails(zone: Zone): void {
-    this.selectedZone = zone;
-    this.showDetails = true;
-    this.showEditOptions = false;
-    this.selectedZoneSensors = this.sensors.filter(sensor => sensor.zoneId === zone.id);
-    this.selectedZoneSprinklers = this.sprinklers.filter(sprinkler => sprinkler.zoneId === zone.id);
-  }
-
-  closeDetails(): void {
-    this.selectedZone = null;
-    this.selectedZoneSensors = [];
-    this.selectedZoneSprinklers = [];
-    this.showDetails = false;
-    this.showEditOptions = false;
-  }
-  closeEditOption(): void {
-    this.selectedZone = null;
-    this.selectedZoneSensors = [];
-    this.selectedZoneSprinklers = [];
-    this.showDetails = false;
-    this.showEditOptions = false;
-  }
-
-  onEdit(zone: Zone): void {
-    this.selectedZone = zone;
-    this.showEditOptions = true;
-    this.showDetails = false;
-  }
-
-  toggleSprinklerForm(): void {
-    this.showSprinklerForm = true;
-    this.showSensorForm = false;
-  }
-
-  toggleSensorForm(): void {
-    this.showSensorForm = true;
-    this.showSprinklerForm = false;
-  }
-
-  addSprinkler(): void {
-    if (this.addSprinklerForm.valid && this.selectedZone) {
-      const newSprinkler: Sprinkler = {
-        ...this.addSprinklerForm.value,
-        connectionDate: new Date().toISOString().split('T')[0], // Fecha actual
-        state: true, // Estado predeterminado
-        zoneId: this.selectedZone.id
-      };
-
-      // Llamar al servicio para agregar el aspersor
-      this.sprinklersService.createSprinkler(newSprinkler).subscribe({
-        next: () => {
-          this.snackBar.open('¡Aspersor agregado exitosamente!', 'Cerrar', {
-            duration: 3000,
-            panelClass: ['success-snackbar']
-          });
-          this.showSprinklerForm = false;
-        },
-        error: () => {
-          this.snackBar.open('Error al agregar el aspersor. Inténtelo nuevamente.', 'Cerrar', {
-            duration: 3000,
-            panelClass: ['error-snackbar']
-          });
-        }
-      });
-    }
-  }
-
-  addSensor(): void {
-    if (this.addSensorForm.valid && this.selectedZone) {
-      const newSensor: Sensor = {
-        ...this.addSensorForm.value,
-        currentData: 0, // Valor inicial para currentData
-        zoneId: this.selectedZone.id
-      };
-
-      // Llamar al servicio para agregar el sensor
-      this.sensorService.createSensor(newSensor).subscribe({
-        next: () => {
-          this.snackBar.open('¡Sensor agregado exitosamente!', 'Cerrar', {
-            duration: 3000,
-            panelClass: ['success-snackbar']
-          });
-          this.showSensorForm = false;
-        },
-        error: () => {
-          this.snackBar.open('Error al agregar el sensor. Inténtelo nuevamente.', 'Cerrar', {
-            duration: 3000,
-            panelClass: ['error-snackbar']
-          });
-        }
-      });
-    }
-  }
-
-
+  protected readonly zones = zones;
 }
