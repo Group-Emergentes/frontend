@@ -1,5 +1,5 @@
 .zone-container {
-  max-width: 400px;
+  max-width: 800px;
   margin: 20px auto;
   padding: 20px;
   border-radius: 8px;
@@ -13,26 +13,42 @@
   color: var(--primary-color);
 }
 
+form {
+  display: grid;
+  gap: 15px;
+}
+
 .form-group {
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group label {
-  display: block;
   font-weight: bold;
-  margin-bottom: 5px;
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"] {
-  width: 100%;
   padding: 10px;
   border: 1px solid var(--border-color);
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+@media (min-width: 600px) {
+  form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  form {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .zone-button {
-  width: 100%;
+  grid-column: span 3;
   padding: 10px;
   background-color: var(--primary-color);
   color: var(--surface-color);
@@ -51,7 +67,8 @@
 }
 
 .text {
-  margin-top: 20px;
+  grid-column: span 3;
   text-align: center;
   color: var(--text-secondary-color);
+  margin-top: 20px;
 }

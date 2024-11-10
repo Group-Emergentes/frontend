@@ -1,5 +1,4 @@
-export class Zone {
-  id:number;
+export class CreateZone {
   name: string;
   cropType: string;
   width: number;
@@ -8,9 +7,9 @@ export class Zone {
   maximumTemperature: number;
   minimumHumidity: number;
   maximumHumidity: number;
+  clientId: number;
 
   constructor() {
-    this.id=0;
     this.name = "";
     this.cropType = "";
     this.width = 0;
@@ -19,6 +18,7 @@ export class Zone {
     this.maximumTemperature = 0;
     this.minimumHumidity = 0;
     this.maximumHumidity = 0;
+    this.clientId = 0;
   }
 
 }

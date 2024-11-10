@@ -7,38 +7,38 @@
     </div>
 
     <div class="form-group">
-      <label for="crop">Crop</label>
-      <input id="crop" type="text" formControlName="crop" required />
+      <label for="cropType">Crop</label>
+      <input id="cropType" type="text" formControlName="cropType" required />
     </div>
 
     <div class="form-group">
-      <label for="widthLand">Width of Land (m)</label>
-      <input id="widthLand" type="number" formControlName="widthLand" required />
+      <label for="width">Width of Land (m)</label>
+      <input id="width" type="number" formControlName="width" required />
     </div>
 
     <div class="form-group">
-      <label for="lengthLand">Length of Land (m)</label>
-      <input id="lengthLand" type="number" formControlName="lengthLand" required />
+      <label for="length">Length of Land (m)</label>
+      <input id="length" type="number" formControlName="length" required />
     </div>
 
     <div class="form-group">
-      <label for="minTemperature">Minimum Temperature (°C)</label>
-      <input id="minTemperature" type="number" formControlName="minTemperature" placeholder="e.g., 15 °C" required />
+      <label for="minimumTemperature">Minimum Temperature (°C)</label>
+      <input id="minimumTemperature" type="number" formControlName="minimumTemperature" placeholder="e.g., 15 °C" required />
     </div>
 
     <div class="form-group">
-      <label for="maxTemperature">Maximum Temperature (°C)</label>
-      <input id="maxTemperature" type="number" formControlName="maxTemperature" placeholder="e.g., 35 °C" required />
+      <label for="maximumTemperature">Maximum Temperature (°C)</label>
+      <input id="maximumTemperature" type="number" formControlName="maximumTemperature" placeholder="e.g., 35 °C" required />
     </div>
 
     <div class="form-group">
-      <label for="minHumidity">Minimum Humidity (%)</label>
-      <input id="minHumidity" type="number" formControlName="minHumidity" placeholder="e.g., 30%" required />
+      <label for="minimumHumidity">Minimum Humidity (%)</label>
+      <input id="minimumHumidity" type="number" formControlName="minimumHumidity" placeholder="e.g., 30%" required />
     </div>
 
     <div class="form-group">
-      <label for="maxHumidity">Maximum Humidity (%)</label>
-      <input id="maxHumidity" type="number" formControlName="maxHumidity" placeholder="e.g., 80%" required />
+      <label for="maximumHumidity">Maximum Humidity (%)</label>
+      <input id="maximumHumidity" type="number" formControlName="maximumHumidity" placeholder="e.g., 80%" required />
     </div>
 
     <button type="submit" [disabled]="!zoneForm.valid" class="zone-button">

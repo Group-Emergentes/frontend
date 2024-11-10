@@ -19,55 +19,58 @@
 </div>
 
 
+
 @if(isEditingZone){
+  <div class="modify-sensor">
+    <div class="modify-container">
+      <h4>Modify Sensors and Sprinklers in Zone 1</h4>
 
-<div class="modify-sensor">
-  <div class="modify-container">
-    <h4>Modify Sensors and Sprinklers in Zone 1</h4>
-
-    <section class="forms">
-      <div class="sensors">
-        <div class="sensors-zone">
-          <p>Lorem ipsum.</p>
-          <p>Lorem ipsum.</p>
-          <p>Lorem ipsum.</p>
-          <p>Lorem ipsum.</p>
-        </div>
-
-        <div class="sensor-form">
-          <h5>New Sensor</h5>
-          <div class="input-box">
-            <label for="sensorType">Sensor Type</label>
-            <input id="sensorType" type="text" placeholder="temperature">
+      <section class="forms">
+        <div class="sensors">
+          <div class="sensors-zone">
+            @if(sensors.length > 0){
+              @for (sensor of sensors; track sensor){
+                <p>{{sensor.sensorId}} {{sensor.value}}</p>
+              }
+            }@else{
+              <p style="background: var(--error-color)">There are no sensors</p>
+            }
           </div>
-          <div class="input-box">
-            <label for="sensorId">Sensor ID</label>
-            <input id="sensorId" type="text" placeholder="temperature#245">
+
+          <div class="sensor-form">
+            <h5>New Sensor</h5>
+            <div class="input-box">
+              <label for="sensorType">Sensor Type</label>
+              <input id="sensorType" [(ngModel)]="createSensor.type" type="text" placeholder="temperature">
+            </div>
+            <div class="input-box">
+              <label for="sensorId">Sensor ID</label>
+              <input id="sensorId" [(ngModel)]="createSensor.sensorId" type="text" placeholder="temperature#245">
+            </div>
+            <button (click)="addSensor()"><mat-icon>add</mat-icon></button>
           </div>
-          <button><mat-icon>add</mat-icon></button>
-        </div>
-      </div>
-
-      <div class="sprinklers">
-        <div class="sprinkler-zone">
-          <p>Lorem ipsum.</p>
-          <p>Lorem ipsum.</p>
-          <p>Lorem ipsum.</p>
-          <p>Lorem ipsum.</p>
         </div>
 
-        <div class="sprinkler-form">
-          <h5>New Sprinkler</h5>
-          <div class="input-box">
-            <label for="sprinklerId">Sprinkler ID</label>
-            <input id="sprinklerId" type="text" placeholder="sprinkler#245">
+        <div class="sprinklers">
+          <div class="sprinkler-zone">
+            <p>Lorem ipsum.</p>
+            <p>Lorem ipsum.</p>
+            <p>Lorem ipsum.</p>
+            <p>Lorem ipsum.</p>
           </div>
-          <button><mat-icon>add</mat-icon></button>
-        </div>
-      </div>
-    </section>
 
-    <button (click)="toggleEditingZone()">Exit</button>
+          <div class="sprinkler-form">
+            <h5>New Sprinkler</h5>
+            <div class="input-box">
+              <label for="sprinklerId">Sprinkler ID</label>
+              <input id="sprinklerId" type="text" placeholder="sprinkler#245">
+            </div>
+            <button><mat-icon>add</mat-icon></button>
+          </div>
+        </div>
+      </section>
+
+      <button (click)="toggleEditingZone()">Exit</button>
+    </div>
   </div>
-</div>
 }

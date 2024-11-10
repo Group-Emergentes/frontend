@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {AuthService} from "../../../../shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,10 @@ import {RouterLink} from "@angular/router";
 export class LoginComponent {
   longInForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private _authService:AuthService,
+              private _router:Router
+              ) {
     this.longInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -25,7 +29,9 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.longInForm.valid ) {
-      console.log('Login Successful:', this.longInForm.value);
+      this._authService.login(this.longInForm.value).subscribe(()=>{
+        this._router.navigate(['/dashboard']);
+      })
     }
 
   }
