@@ -17,6 +17,8 @@ export class ZoneService extends BaseService<any>{
     return this.http.get(`${this.buildUrl()}/client/${id}`);
   }
 
-
+  getSoilMoistureReport(zoneId:number):Observable<any>{
+    return this.http.get(`${this.buildUrl()}/${zoneId}/soil-moisture-report`);
+  }
 
 }

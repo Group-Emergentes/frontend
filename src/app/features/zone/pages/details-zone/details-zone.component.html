@@ -1,39 +1,47 @@
-<div class="details-panel">
-    <h2>{{detailZone.zoneName}}</h2>
+@if(zones.length>0){
+  <div class="details-panel">
+      <h2>{{zones[0].name}}</h2>
 
-    <div class="transparent-card">
-      <h3>Sensors</h3>
-      <div class="sensor-data">
-        @for(sensor of detailZone.sensors; track sensor){
-          <div class="sensor">
-            <div class="circle green-circle"></div>
-            <div>
-              <p class="name">{{ sensor.name }}</p>
-              <p class="data">Humidity: {{sensor.data}}</p>
-              <p class="info">Reporting Correctly</p>
+      <div class="transparent-card">
+        <h3>Sensors</h3>
+        <div class="sensor-data">
+          @for(sensor of sensors; track sensor){
+            <div class="sensor">
+              <div class="circle green-circle"></div>
+              <div>
+                <p class="name">{{ sensor.sensorId }}</p>
+                @if(sensor.type == 'HUMIDITY'){
+                  <p class="data">Humidity: {{sensor.value}}</p>
+                }@else{
+                  <p class="data">Temperature: {{sensor.value}}</p>
+                }
+                <p class="info">Reporting Correctly</p>
+              </div>
             </div>
-          </div>
-        }
+          }
+        </div>
       </div>
-    </div>
 
-    <div class="card transparent-card">
-      <h3>Sprinklers</h3>
-      <div class="sprinkler-data">
-        @for (sprinkler of detailZone.sprinklers; track sprinkler){
-          <div class="sprinkler-circle">
-            <div class="circle orange-circle"></div>
-            <button [ngClass]="{'active-btn': sprinkler.status, 'inactive-btn': !sprinkler.status}">
-              {{ sprinkler.status ? 'Activado' : 'Desactivado' }}
-            </button>
-            <div class="sprinkler-info">
-              <p>Name: {{ sprinkler.id }}</p>
-              <p>Last Connection: {{ sprinkler.lastConnection}}</p>
+      <div class="card transparent-card">
+        <h3>Sprinklers</h3>
+        <button (click)="activeAllSprinklers()">Active All</button>
+        <button (click)="disableAllSprinklers()">Disable All</button>
+        <div class="sprinkler-data">
+          @for (sprinkler of sprinklers; track sprinkler){
+            <div class="sprinkler-circle">
+              <div class="circle orange-circle"></div>
+              <button [ngClass]="{'active-btn': sprinkler.active, 'inactive-btn': !sprinkler.active}">
+                {{ sprinkler.active ? 'Activado' : 'Desactivado' }}
+              </button>
+              <div class="sprinkler-info">
+                <p>SprinklerId: {{ sprinkler.sprinklerId }}</p>
+                <p>Last Connection: {{ sprinkler.lastActivation | date:'shortDate' }}</p>
+
+              </div>
             </div>
-          </div>
-        }
+          }
+        </div>
       </div>
-    </div>
 
-</div>
-
+  </div>
+}

@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {Component, AfterViewInit, ElementRef, ViewChild, Input} from '@angular/core';
 import { Chart, ChartConfiguration, ChartData, ChartOptions, registerables } from 'chart.js';
+import {Zone} from "../../../zone/models/Zone";
 
 Chart.register(...registerables);
 
@@ -60,7 +61,7 @@ let irrigationFrequency = {
 })
 export class IrrigationFrequencyComponent implements AfterViewInit {
 
-  zones = ['Zone 1', 'Zone 2', 'Zone 3']
+  @Input() zones:Zone[]=[];
 
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
   chart!: Chart;

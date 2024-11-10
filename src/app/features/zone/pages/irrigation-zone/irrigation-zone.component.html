@@ -30,7 +30,7 @@
           <div class="sensors-zone">
             @if(sensors.length > 0){
               @for (sensor of sensors; track sensor){
-                <p>{{sensor.sensorId}} {{sensor.value}}</p>
+                <p>{{sensor.sensorId}} : {{sensor.value}}</p>
               }
             }@else{
               <p style="background: var(--error-color)">There are no sensors</p>
@@ -53,19 +53,18 @@
 
         <div class="sprinklers">
           <div class="sprinkler-zone">
-            <p>Lorem ipsum.</p>
-            <p>Lorem ipsum.</p>
-            <p>Lorem ipsum.</p>
-            <p>Lorem ipsum.</p>
+            @for(sprinkler of sprinklers; track sprinkler){
+              <p>{{sprinkler.sprinklerId}}</p>
+            }
           </div>
 
           <div class="sprinkler-form">
             <h5>New Sprinkler</h5>
             <div class="input-box">
               <label for="sprinklerId">Sprinkler ID</label>
-              <input id="sprinklerId" type="text" placeholder="sprinkler#245">
+              <input id="sprinklerId" [(ngModel)]="createSprinkler.sprinklerId" type="text" placeholder="sprinkler#245">
             </div>
-            <button><mat-icon>add</mat-icon></button>
+            <button (click)="addSprinkler()"><mat-icon>add</mat-icon></button>
           </div>
         </div>
       </section>

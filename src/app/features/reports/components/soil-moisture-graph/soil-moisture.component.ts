@@ -1,90 +1,137 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration, ChartData, ChartOptions, registerables } from 'chart.js';
+import { Component, AfterViewInit, ElementRef, ViewChild, Input, OnInit } from '@angular/core';
+import { Chart, ChartConfiguration, ChartData, registerables } from 'chart.js';
+import { Zone } from "../../../zone/models/Zone";
+import { ZoneService } from "../../../zone/services/zone/zone.service";
+import { DecimalPipe } from "@angular/common";
+import { WebSocketSensorData } from "../../../../shared/services/websocket/web-socket-sensor-data";
+import { WebSocketData } from "../../../../shared/model/WebSocketData";
+import { Subscription } from "rxjs";
 
 Chart.register(...registerables);
 
-let soilMoistureData = {
-  "averages": {
-    "last_year": 35.6,
-    "last_90_days": 40.2,
-    "last_30_days": 42.8
-  },
-  "last_30_days_graph": [
-    {"date": "2024-09-28", "moisture": 41.2},
-    {"date": "2024-09-29", "moisture": 39.8},
-    {"date": "2024-09-30", "moisture": 42.1},
-    {"date": "2024-10-01", "moisture": 43.5},
-    {"date": "2024-10-02", "moisture": 44.0},
-    {"date": "2024-10-03", "moisture": 41.9},
-    {"date": "2024-10-04", "moisture": 40.7},
-    {"date": "2024-10-05", "moisture": 38.4},
-    {"date": "2024-10-06", "moisture": 37.6},
-    {"date": "2024-10-07", "moisture": 36.8},
-    {"date": "2024-10-08", "moisture": 35.4},
-    {"date": "2024-10-09", "moisture": 38.9},
-    {"date": "2024-10-10", "moisture": 40.1},
-    {"date": "2024-10-11", "moisture": 42.3},
-    {"date": "2024-10-12", "moisture": 43.7},
-    {"date": "2024-10-13", "moisture": 44.9},
-    {"date": "2024-10-14", "moisture": 45.2},
-    {"date": "2024-10-15", "moisture": 43.8},
-    {"date": "2024-10-16", "moisture": 42.5},
-    {"date": "2024-10-17", "moisture": 40.6},
-    {"date": "2024-10-18", "moisture": 41.7},
-    {"date": "2024-10-19", "moisture": 39.3},
-    {"date": "2024-10-20", "moisture": 37.8},
-    {"date": "2024-10-21", "moisture": 36.4},
-    {"date": "2024-10-22", "moisture": 38.1},
-    {"date": "2024-10-23", "moisture": 39.0},
-    {"date": "2024-10-24", "moisture": 40.4},
-    {"date": "2024-10-25", "moisture": 42.2},
-    {"date": "2024-10-26", "moisture": 44.3},
-    {"date": "2024-10-27", "moisture": 45.5},
-    {"date": "2024-10-28", "moisture": 46.0},
-    {"date": "2024-10-29", "moisture": 47.1},
-    {"date": "2024-10-30", "moisture": 48.2},
-    {"date": "2024-10-31", "moisture": 49.0},
-    {"date": "2024-11-01", "moisture": 50.3},
-    {"date": "2024-11-02", "moisture": 51.1},
-    {"date": "2024-11-03", "moisture": 52.0},
-    {"date": "2024-11-04", "moisture": 53.5}
-  ]
+interface SoilMoistureData {
+  averages: {
+    lastYear: number;
+    last90Days: number;
+    last30Days: number;
+  };
+  last30Records: Array<{
+    date: string;
+    value: number;
+  }>;
 }
 
 @Component({
   selector: 'app-soil-moisture-graph',
   standalone: true,
-  imports: [],
   templateUrl: './soil-moisture.component.html',
+  imports: [
+    DecimalPipe
+  ],
   styleUrls: ['./soil-moisture.component.css']
 })
-export class SoilMoistureComponent implements AfterViewInit {
-
-  zones = ['Zone 1', 'Zone 2', 'Zone 3']
-
-
+export class SoilMoistureComponent implements OnInit, AfterViewInit {
+  @Input() zones: Zone[] = [];
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
+
+  messageSubscription!: Subscription;
+  webSocketData!: WebSocketData;
+  soilMoistureReport!: SoilMoistureData;
   chart!: Chart;
 
-  ngAfterViewInit() {
-    const labels = soilMoistureData.last_30_days_graph.map(entry => entry.date);
-    const moistureData = soilMoistureData.last_30_days_graph.map(entry => entry.moisture);
+  constructor(
+    private _zoneService: ZoneService,
+    private _webSocketSensorData: WebSocketSensorData,
+  ) {}
 
-    const data: ChartData<'line'> = {
+  ngOnInit(): void {
+    this.getSoilMoistureReport();
+  }
 
+  ngAfterViewInit(): void {
+    const interval = setInterval(() => {
+      if (this.soilMoistureReport && this.chartCanvas) {
+        this.createChart();
+        clearInterval(interval);
+        this.webSocketConnection();
+      }
+    }, 100);
+  }
+
+  getSoilMoistureReport(): void {
+    this._zoneService.getSoilMoistureReport(1).subscribe((response: any) => {
+      this.soilMoistureReport = response.data;
+      if (this.chartCanvas) {
+        this.createChart();
+      }
+    });
+  }
+
+  webSocketConnection() {
+    this.messageSubscription = this._webSocketSensorData.messages$.subscribe({
+      next: (message) => {
+        this.webSocketData = message;
+        if (this.webSocketData && this.webSocketData.sensorData) {
+          this.updateChartData(this.webSocketData.sensorData);
+        }
+      },
+      error: (error) => console.error("Error al recibir mensaje:", error)
+    });
+  }
+
+  private updateChartData(sensorData: Array<{ sensorId: string; value: number }>): void {
+    const moistureData = sensorData
+      .filter(sensor => sensor.sensorId.startsWith('Hsensor'))
+      .map(sensor => sensor.value);
+
+    if (this.chart && moistureData.length) {
+      const averageMoisture = moistureData.reduce((acc, value) => acc + value, 0) / moistureData.length;
+
+      const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      this.chart.data.labels!.push(currentTime);
+      this.chart.data.datasets[0].data.push(averageMoisture);
+
+      if (this.chart.data.labels!.length > 30) {
+        this.chart.data.labels = this.chart.data.labels!.slice(-30);
+        this.chart.data.datasets[0].data = this.chart.data.datasets[0].data.slice(-30);
+      }
+
+      this.chart.update('resize');
+    }
+  }
+
+  private createChart(): void {
+    if (this.chart) {
+      return;
+    }
+
+    const data = this.getChartData();
+    const config = this.getChartConfig(data);
+    this.chart = new Chart(this.chartCanvas.nativeElement, config);
+  }
+
+  private getChartData(): ChartData<'line'> {
+    const labels = this.soilMoistureReport.last30Records.map((entry) =>
+      new Date(entry.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    );
+    const moistureData = this.soilMoistureReport.last30Records.map((entry) => entry.value);
+
+    return {
       labels: labels,
       datasets: [
         {
-          label: 'Soil moisture last 30 days',
+          label: 'Soil Moisture Last 30 Records',
           data: moistureData,
           borderColor: 'red',
           backgroundColor: 'rgba(255, 0, 0, 0.5)',
         },
       ]
     };
+  }
 
-
-    const config: ChartConfiguration<'line'> = {
+  private getChartConfig(data: ChartData<'line'>): ChartConfiguration<'line'> {
+    return {
       type: 'line',
       data: data,
       options: {
@@ -96,7 +143,7 @@ export class SoilMoistureComponent implements AfterViewInit {
           },
           title: {
             display: true,
-            text: 'Chart.js Line Chart'
+            text: 'Soil Moisture Over the Last 30 Days'
           }
         },
         hover: {
@@ -113,20 +160,16 @@ export class SoilMoistureComponent implements AfterViewInit {
           y: {
             title: {
               display: true,
-              text: 'Value'
+              text: 'Moisture Value'
             },
-            min: 0,
-            max: 100,
+            min: 20,
+            max: 50,
             ticks: {
-              stepSize: 50
+              stepSize: 10
             }
           }
         }
       }
     };
-
-    this.chart = new Chart(this.chartCanvas.nativeElement, config);
   }
-
-  protected readonly soilMoistureData = soilMoistureData;
 }

@@ -1,101 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {NgClass, NgForOf, NgIf} from "@angular/common";
-
-let detailZone = {
-  "zoneName": "Zona Norte",
-  "sensors": [
-    {
-      "id": "sensor1",
-      "name": "Sensor de Humedad 1",
-      "data": 45,
-      "type": "humidity"
-    },
-    {
-      "id": "sensor2",
-      "name": "Sensor de Temperatura 1",
-      "data": 22,
-      "type": "temperature"
-    },
-    {
-      "id": "sensor3",
-      "name": "Sensor de Humedad 2",
-      "data": 47,
-      "type": "humidity"
-    },
-    {
-      "id": "sensor4",
-      "name": "Sensor de Temperatura 2",
-      "data": 24,
-      "type": "temperature"
-    },
-    {
-      "id": "sensor5",
-      "name": "Sensor de Humedad 3",
-      "data": 50,
-      "type": "humidity"
-    },
-    {
-      "id": "sensor6",
-      "name": "Sensor de Temperatura 3",
-      "data": 23,
-      "type": "temperature"
-    },
-    {
-      "id": "sensor7",
-      "name": "Sensor de Humedad 4",
-      "data": 42,
-      "type": "humidity"
-    },
-    {
-      "id": "sensor8",
-      "name": "Sensor de Temperatura 4",
-      "data": 25,
-      "type": "temperature"
-    }
-  ],
-  "sprinklers": [
-    {
-      "id": "sprinkler1",
-      "lastConnection": "2024-11-01T10:00:00Z",
-      "status": true
-    },
-    {
-      "id": "sprinkler2",
-      "lastConnection": "2024-11-01T11:00:00Z",
-      "status": false
-    },
-    {
-      "id": "sprinkler3",
-      "lastConnection": "2024-11-01T12:30:00Z",
-      "status": true
-    },
-    {
-      "id": "sprinkler4",
-      "lastConnection": "2024-11-01T14:15:00Z",
-      "status": false
-    },
-    {
-      "id": "sprinkler5",
-      "lastConnection": "2024-11-01T09:45:00Z",
-      "status": true
-    },
-    {
-      "id": "sprinkler6",
-      "lastConnection": "2024-11-01T08:30:00Z",
-      "status": false
-    },
-    {
-      "id": "sprinkler7",
-      "lastConnection": "2024-11-01T15:20:00Z",
-      "status": true
-    },
-    {
-      "id": "sprinkler8",
-      "lastConnection": "2024-11-01T16:00:00Z",
-      "status": false
-    }
-  ]
-}
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {Zone} from "../../models/Zone";
+import {Sensor} from "../../models/Sensor";
+import {Sprinkler} from "../../models/Sprinkler";
+import {ZoneService} from "../../services/zone/zone.service";
+import {SensorService} from "../../services/sensor/sensor.service";
+import {SprinklerService} from "../../services/sprinkler/sprinkler.service";
+import {WebSocketSensorData} from "../../../../shared/services/websocket/web-socket-sensor-data";
+import {Subscription} from "rxjs";
+import {WebSocketData} from "../../../../shared/model/WebSocketData";
 
 @Component({
   selector: 'app-details-zone',
@@ -103,20 +16,100 @@ let detailZone = {
   imports: [
     NgForOf,
     NgIf,
-    NgClass
+    NgClass,
+    DatePipe
   ],
   templateUrl: './details-zone.component.html',
   styleUrl: './details-zone.component.css'
 })
-export class DetailsZoneComponent implements OnInit{
+export class DetailsZoneComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  private messageSubscription!: Subscription;
+  webSocketData!: WebSocketData ;
+
+  zones:Zone[] = []
+  sensors:Sensor[]=[]
+  sprinklers:Sprinkler[]=[]
+
+  constructor(
+    private _zoneService:ZoneService,
+    private _sensorService:SensorService,
+    private _sprinklerService:SprinklerService,
+    private _webSocketSensorData: WebSocketSensorData,
+  ) {
 
   }
-
   ngOnInit(): void {
-
+    this.getZones();
+    this.getSensors();
+    this.getSprinklers();
+    this.webSocketConnection();
+  }
+  ngOnDestroy(): void {
+    if (this.messageSubscription) {
+      this.messageSubscription.unsubscribe();
+    }
   }
 
-  protected readonly detailZone = detailZone;
+  getZones(){
+    this._zoneService.getZonesByClient('1').subscribe((response:any)=>{
+      this.zones = response.data;
+    })
+  }
+  getSensors(){
+    this._sensorService.getSensorsByZoneId('1').subscribe((response:any)=>{
+      this.sensors = response.data;
+    })
+  }
+  getSprinklers(){
+    this._sprinklerService.getSprinklersByZoneId(1).subscribe((response:any)=>{
+      this.sprinklers = response.data;
+    })
+  }
+
+  activeAllSprinklers() {
+    this._sprinklerService.activeAllSprinklers().subscribe((response: any) => {
+      if(response.success){
+        for (let sprinkler of this.sprinklers) {
+          sprinkler.active = true;
+        }
+        console.log("activated sprinklers");
+      }
+    });
+  }
+  disableAllSprinklers(){
+    this._sprinklerService.disableAllSprinklers(1).subscribe((response:any)=>{
+      if(response.success){
+        for (let sprinkler of this.sprinklers) {
+          sprinkler.active = false;
+        }
+        console.log("disabled sprinklers");
+      }
+    })
+  }
+
+  webSocketConnection(){
+    this.messageSubscription = this._webSocketSensorData.messages$.subscribe({
+      next: (message) => {
+        this.webSocketData = message;
+        this.updateSensorData();
+      },
+      error: (error) => console.error("Error al recibir mensaje:", error)
+    });
+  }
+
+  updateSensorData() {
+    if (this.webSocketData && this.webSocketData.sensorData) {
+      const sensorDataArray = this.webSocketData.sensorData;
+
+      for (const sensorData of sensorDataArray) {
+        const sensorToUpdate = this.sensors.find(sensor => sensor.sensorId === sensorData.sensorId);
+        if (sensorToUpdate) {
+          sensorToUpdate.value = sensorData.value;
+        }
+      }
+    }
+  }
+
+
 }

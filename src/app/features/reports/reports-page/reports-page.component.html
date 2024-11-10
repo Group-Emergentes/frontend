@@ -1,20 +1,27 @@
-<div class="reports-container">
+@if(zones.length>0){
+  <div class="reports-container">
 
-  <h4>General reports on system usage and efficiency</h4>
+    <h4>General reports on system usage and efficiency</h4>
 
-  <div class="reports">
-    <section class="irrigation-frequency">
-      <h5>Irrigation Frequency Report</h5>
+    <div class="reports">
+      <section class="irrigation-frequency">
+        <h5>Irrigation Frequency Report</h5>
 
-      <app-irrigation-frequency></app-irrigation-frequency>
+        <app-irrigation-frequency
+          [zones]="zones"
+        ></app-irrigation-frequency>
 
-    </section>
+      </section>
 
-    <section class="soilMoisture">
-      <h5>Soil Moisture Report</h5>
+      <section class="soilMoisture">
+        <h5>Soil Moisture Report</h5>
 
-      <app-soil-moisture-graph></app-soil-moisture-graph>
+        <app-soil-moisture-graph
+          [zones]="zones"
+        ></app-soil-moisture-graph>
 
-    </section>
+      </section>
+    </div>
   </div>
-</div>
+
+}

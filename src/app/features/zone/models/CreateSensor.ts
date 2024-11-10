@@ -10,4 +10,7 @@ export class CreateSensor {
     this.zoneId = 0;
   }
 
+  isValid(){
+    return this.sensorId !== "" && this.type !== "" && this.zoneId > 0;
+  }
 }

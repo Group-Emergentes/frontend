@@ -2,16 +2,18 @@
 
   <div class="zones-filter">
     @for(zone of zones; track  zone){
-      <button>{{zone}}</button>
+      <button>{{zone.name}}</button>
     }
   </div>
 
-  <p>Average soil moisture in the last yearAverage soil moisture in the last year <span>{{soilMoistureData.averages.last_year}}</span></p>
-  <p>Average soil moisture over the last 90 days <span>{{soilMoistureData.averages.last_90_days}}</span></p>
-  <p>Average soil moisture in the last 30 days <span>{{soilMoistureData.averages.last_30_days}}</span></p>
+  @if(soilMoistureReport){
+    <p>Average soil moisture in the last year <span>{{ soilMoistureReport.averages.lastYear | number: '1.2-2' }}</span></p>
+    <p>Average soil moisture over the last 90 days <span>{{ soilMoistureReport.averages.last90Days | number: '1.2-2' }}</span></p>
+    <p>Average soil moisture in the last 30 days <span>{{ soilMoistureReport.averages.last30Days | number: '1.2-2' }}</span></p>
 
-  <div class="graph">
-    <canvas #chartCanvas></canvas>
-  </div>
+    <div class="graph">
+      <canvas #chartCanvas></canvas>
+    </div>
+  }
 
 </div>
