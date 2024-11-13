@@ -12,13 +12,15 @@ export class CreateSprinkler{
   }
 }
 
-export class ActiveSprinkler {
+export class SprinklerAction  {
   isManual: boolean;
   zoneId: number;
+  active: boolean
 
   constructor() {
     this.isManual = true;
     this.zoneId = 0;
+    this.active = false;
   }
 
 }

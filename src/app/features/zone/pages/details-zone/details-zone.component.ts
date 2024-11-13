@@ -78,7 +78,7 @@ export class DetailsZoneComponent implements OnInit, OnDestroy {
     });
   }
   disableAllSprinklers(){
-    this._sprinklerService.disableAllSprinklers(1).subscribe((response:any)=>{
+    this._sprinklerService.disableAllSprinklers().subscribe((response:any)=>{
       if(response.success){
         for (let sprinkler of this.sprinklers) {
           sprinkler.active = false;

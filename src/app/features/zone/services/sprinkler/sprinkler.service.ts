@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../../../environments/environment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError, Observable, retry} from "rxjs";
-import {Sprinkler} from "../../models/Sprinkler";
+import {HttpClient, } from "@angular/common/http";
+import { Observable} from "rxjs";
 import {BaseService} from "../../../../shared/services/base/base.service";
-import {ActiveSprinkler} from "../../models/SprinklerDto";
+import {SprinklerAction} from "../../models/SprinklerDto";
 
 
 @Injectable({
@@ -18,15 +16,21 @@ export class SprinklerService extends BaseService<any>{
   }
 
   activeAllSprinklers():Observable<any>{
-    let activeSprinkler:ActiveSprinkler = new ActiveSprinkler();
-    activeSprinkler.zoneId = 1;
-    activeSprinkler.isManual = true;
+    let sprinklerAction:SprinklerAction = new SprinklerAction();
+    sprinklerAction.zoneId = 1;
+    sprinklerAction.isManual = true;
+    sprinklerAction.active =  true;
 
-    return this.http.post(`${this.buildUrl()}/zone/active-sprinklers`, activeSprinkler);
+    return this.http.post(`${this.buildUrl()}/zone/active-disable-sprinklers`, sprinklerAction);
   }
 
-  disableAllSprinklers(zoneId:number):Observable<any>{
-    return this.http.post(`${this.buildUrl()}/zone/disable-sprinklers/${zoneId}`,null);
+  disableAllSprinklers():Observable<any>{
+    let sprinklerAction:SprinklerAction = new SprinklerAction();
+    sprinklerAction.zoneId = 1;
+    sprinklerAction.isManual = true;
+    sprinklerAction.active =  false;
+
+    return this.http.post(`${this.buildUrl()}/zone/active-disable-sprinklers`,sprinklerAction);
   }
 
   getSprinklersByZoneId(zoneId:number):Observable<any>{
