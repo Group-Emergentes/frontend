@@ -1,0 +1,20 @@
+
+<div class="notifications-container">
+  <h1>Real-Time Notifications</h1>
+  <button (click)="clearNotifications()" class="clear-button">Clear Notifications</button>
+
+  @if(notifications.length === 0){
+    <div class="no-notifications">
+      <p>No notifications available.</p>
+    </div>
+  }@else{
+    @for (notification of notifications; track notification){
+      <li class="notification-item">
+        <strong>Sensor ID:</strong> {{ notification.sensorId }} <br />
+        <strong>Message:</strong> {{ notification.message }}
+      </li>
+    }
+  }
+
+</div>
+
